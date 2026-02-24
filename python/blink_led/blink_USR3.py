@@ -51,7 +51,7 @@ def main():
     except KeyboardInterrupt:
         pass
     finally:
-        GPIO.output("USR3",GPIO.LOW)
+        GPIO.output("USR3",GPIO.LOW) # Resets the LED
         GPIO.cleanup()
 if __name__ =="__main__":
     main()
