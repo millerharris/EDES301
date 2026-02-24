@@ -154,10 +154,10 @@ class Button():
     
     def _setup(self):
         """ Setup the hardware components. """
-        # Initialize Button
-        # HW#4 TODO: (one line of code)
-        #   Remove "pass" and use the Adafruit_BBIO.GPIO library to set up the button
-        pass
+        GPIO.setup(self.pin, GPIO.IN, pull_up_down=GPIO.PUD_UP) #sets up the button  
+        # at the pin and reads the pin voltage 
+        
+        
 
     # End def
 
@@ -168,10 +168,8 @@ class Button():
            Returns:  True  - Button is pressed
                      False - Button is not pressed
         """
-        # HW#4 TODO: (one line of code)
-        #   Remove "pass" and return the comparison of input value of the GPIO pin of 
-        #   the buton (i.e. self.pin) to the "pressed value" of the class 
-        pass
+        return GPIO.input(self.pin) == self.pressed_value # compares the state of the 
+        # Button and determines if it is pressed or not based on the pressed value
 
     # End def
 
@@ -199,7 +197,8 @@ class Button():
         #   of the class (i.e. we are executing the while loop while the 
         #   button is not being pressed)
         #
-        while(False):
+        while GPIO.input(self.pin) == self.unpressed_value: # updated the conditioin 
+        # to see if the input in unpressed 
         
             if self.unpressed_callback is not None:
                 self.unpressed_callback_value = self.unpressed_callback()
@@ -222,7 +221,8 @@ class Button():
         #   of the class (i.e. we are executing the while loop while the 
         #   button is being pressed)
         #
-        while(False):
+        while GPIO.input(self.pin) == self.pressed_value: # updated condition
+        # to see if the input is pressed
         
             if self.pressed_callback is not None:
                 self.pressed_callback_value = self.pressed_callback()
